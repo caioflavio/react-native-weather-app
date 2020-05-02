@@ -7,7 +7,7 @@ import { API_KEY } from './components/weather/utils/WeatherAPIKey';
 
 export default class App extends React.Component {
   state = {
-    isLoading: false,
+    isLoading: true,
     temperature: 0,
     weatherCondition: null,
     error: null
@@ -30,9 +30,8 @@ export default class App extends React.Component {
     fetch('https://api.openweathermap.org/data/2.5/weather?lat='+lat+'&lon='+lng+'&APPID='+API_KEY+'&units=metric')
     .then( res => res.json())
     .then( json => {
-      console.log(json);
       this.setState({
-        temperature: json.main.temp,
+        temperature: json.main.temp.toFixed(),
         weatherCondition: json.weather[0].main,
         weatherDescription: json.weather[0].description,
         locationName: json.name,
@@ -46,17 +45,13 @@ export default class App extends React.Component {
     const { isLoading } = this.state;
     return (
       <View style={styles.container}>
-        {
-          isLoading 
-          ? <Text>Fetching The Weather</Text> 
-          : <Weather 
-              weather={this.state.weatherCondition} 
-              temperature={this.state.temperature}
-              location={this.state.locationName}
-              description={this.state.weatherDescription}
-              feels_like={this.state.feelsLike}
-            />
-            }
+        {isLoading ? <Text>Fetching The Weather</Text> : <Weather 
+            weather={this.state.weatherCondition} 
+            temperature={this.state.temperature}
+            location={this.state.locationName}
+            description={this.state.weatherDescription}
+            feels_like={this.state.feelsLike}
+          />}
       </View>
     );
   }
