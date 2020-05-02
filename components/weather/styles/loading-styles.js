@@ -11,5 +11,8 @@ export const styles = StyleSheet.create({
         justifyContent: 'flex-end',
         paddingLeft: 25,
         marginBottom: 40
-    }
+    },
+    backgroundImage: {
+        flex: 1,
+    },
 });
