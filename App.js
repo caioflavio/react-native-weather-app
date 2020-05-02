@@ -2,6 +2,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Animated } from 'react-native';
 import Weather from './components/weather/Weather';
+import LoadingWeather from './components/weather/LoadingWeather';
 import { styles } from './components/styles/app-styles';
 import { API_KEY } from './components/weather/utils/WeatherAPIKey';
 
@@ -45,7 +46,9 @@ export default class App extends React.Component {
     const { isLoading } = this.state;
     return (
       <View style={styles.container}>
-        {isLoading ? <Text>Fetching The Weather</Text> : <Weather 
+        {isLoading 
+            ? <LoadingWeather/>
+            : <Weather 
             weather={this.state.weatherCondition} 
             temperature={this.state.temperature}
             location={this.state.locationName}
